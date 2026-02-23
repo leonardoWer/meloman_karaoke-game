@@ -20,7 +20,6 @@ const AdminPanel: React.FC<AdminPanelProps> = ({
     const { playSound } = useSound();
 
     const handleSwitchTeam = () => {
-        playSound('switchToSound');
         onSwitchTeam();
     };
 

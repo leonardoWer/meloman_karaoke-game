@@ -67,14 +67,14 @@ const AnswersDisplay: React.FC<AnswersDisplayProps> = ({ answers }) => {
 
         {/* Легенда цветов */}
         <div className="answers-legend">
-        <div className="legend-item">
-            <span className="legend-color legend-color--first"></span>
-            <span>Ответы команды 1</span>
-        </div>
-        <div className="legend-item">
-            <span className="legend-color legend-color--second"></span>
-            <span>Ответы команды 2</span>
-        </div>
+            <div className="legend-item">
+                <span className="legend-color legend-color--first"></span>
+                <span>Ответы участника 1</span>
+            </div>
+            <div className="legend-item">
+                <span className="legend-color legend-color--second"></span>
+                <span>Ответы участника 2</span>
+            </div>
         </div>
     </div>
 );

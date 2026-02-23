@@ -46,6 +46,8 @@ const GamePage: React.FC = () => {
 
         if (gamePhase === 'selection-question') {
             playMusic('thinkingMusic');
+        } else if (gamePhase === 'showing-answers') {
+            playMusic('transitionMusic');
         } else {
             stopMusic();
         }
@@ -78,9 +80,9 @@ const GamePage: React.FC = () => {
     }, [dispatch]);
 
     const handleVideoEnd = useCallback(() => {
-        playSound('transitionMusic');
         dispatch(setGamePhase('showing-answers'));
-    }, [playSound, dispatch]);
+    }, [dispatch]);
+
 
     const handleScoreSubmit = useCallback((teamId: string, score: number) => {
         // Добавляем баллы команде
