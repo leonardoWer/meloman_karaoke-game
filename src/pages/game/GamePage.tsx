@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks.ts";
-import {useSound} from "../../hooks/useSound.ts";
-import {addScore, nextRound, setGamePhase} from "../../store/slices/gameSlice.ts";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks.ts";
+import { useSound } from "../../hooks/useSound.ts";
+import { addScore, nextRound, setGamePhase } from "../../store/slices/gameSlice.ts";
 import Layout from "../../components/common/Layout/Layout.tsx";
 import ScoreBoard from "./components/ScoreBoard/ScoreBoard.tsx";
 import SelectSongPhase from "./components/GamePhases/SelectSongPhase.tsx";
@@ -22,7 +22,7 @@ interface GameState {
 const GamePage: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { teams, currentRound, gamePhase} = useAppSelector((state) => state.game);
+    const { teams, currentRound, gamePhase } = useAppSelector((state) => state.game);
     const rounds = useAppSelector((state) => state.rounds.rounds);
     const { playSound, playMusic, stopMusic } = useSound();
 
@@ -69,7 +69,11 @@ const GamePage: React.FC = () => {
     }, [dispatch]);
 
     const handleSongSelect = useCallback((songId: string) => {
-        setState(prev => ({ ...prev, selectedSongId: songId }));
+        // Обновляем состояние и меняем фазу
+        setState(prev => ({
+            ...prev,
+            selectedSongId: songId
+        }));
         dispatch(setGamePhase('watching-video'));
     }, [dispatch]);
 
@@ -92,7 +96,7 @@ const GamePage: React.FC = () => {
             setState(prev => ({
                 ...prev,
                 currentPhaseTeamIndex: 1,
-                selectedSongId: null,
+                // НЕ сбрасываем selectedSongId, чтобы вторая команда знала, какая песня уже выбрана
                 teamAnswers: {}
             }));
             dispatch(setGamePhase('song-selection'));
@@ -101,7 +105,7 @@ const GamePage: React.FC = () => {
             setState(prev => ({
                 ...prev,
                 currentPhaseTeamIndex: 0,
-                selectedSongId: null,
+                selectedSongId: null, // Сбрасываем только при переходе к новому раунду
                 teamAnswers: {}
             }));
 
@@ -174,6 +178,8 @@ const GamePage: React.FC = () => {
                         <SelectSongPhase
                             songs={currentRoundData.songs}
                             onSelectSong={handleSongSelect}
+                            selectedSongId={state.selectedSongId} // Используем state.selectedSongId
+                            currentTeamIndex={state.currentPhaseTeamIndex}
                         />
                     )}
 
