@@ -7,7 +7,7 @@ interface SelectQuestionPhaseProps {
     round: Round;
     currentTeam: Team;
     onTimeEnd: () => void;
-    onComplete: () => void;
+    onComplete: (winningTeamId: string) => void;
 }
 
 const SelectQuestionPhase: React.FC<SelectQuestionPhaseProps> = ({
@@ -41,9 +41,9 @@ const SelectQuestionPhase: React.FC<SelectQuestionPhaseProps> = ({
 
             <button
                 className="btn btn-glass"
-                onClick={onComplete}
+                onClick={() => onComplete(currentTeam.id)}
             >
-                Завершить выбор
+                Назначить победителем {currentTeam.name}
             </button>
         </div>
     );

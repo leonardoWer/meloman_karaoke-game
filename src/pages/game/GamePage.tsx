@@ -62,13 +62,31 @@ const GamePage: React.FC = () => {
 
     const handleTimeEnd = useCallback(() => {
         playSound('timerEndSound');
-        // Автоматически переходим к выбору песни
+
+        // Переключаем на другую команду
+        const nextTeamIndex = state.currentPhaseTeamIndex === 0 ? 1 : 0;
+        setState(prev => ({...prev,
+            currentPhaseTeamIndex: nextTeamIndex
+        }));
+
         dispatch(setGamePhase('song-selection'));
     }, [playSound, dispatch]);
 
-    const handleSelectionComplete = useCallback(() => {
+    const handleQuestionComplete = useCallback((winningTeamId: string) => {
+        // playSound('successSound');
+
+        // Находим индекс победившей команды
+        const winningTeamIndex = teams.findIndex(t => t.id === winningTeamId);
+        if (winningTeamIndex !== -1) {
+            setState(prev => ({
+                ...prev,
+                currentPhaseTeamIndex: winningTeamIndex
+            }));
+        }
+
+        // Переходим к выбору песни
         dispatch(setGamePhase('song-selection'));
-    }, [dispatch]);
+    }, [playSound, dispatch, teams]);
 
     const handleSongSelect = useCallback((songId: string) => {
         // Обновляем состояние и меняем фазу
@@ -172,7 +190,7 @@ const GamePage: React.FC = () => {
                             round={currentRoundData}
                             currentTeam={currentTeam}
                             onTimeEnd={handleTimeEnd}
-                            onComplete={handleSelectionComplete}
+                            onComplete={handleQuestionComplete}
                         />
                     )}
 
@@ -180,7 +198,7 @@ const GamePage: React.FC = () => {
                         <SelectSongPhase
                             songs={currentRoundData.songs}
                             onSelectSong={handleSongSelect}
-                            selectedSongId={state.selectedSongId} // Используем state.selectedSongId
+                            selectedSongId={state.selectedSongId}
                             currentTeamIndex={state.currentPhaseTeamIndex}
                         />
                     )}

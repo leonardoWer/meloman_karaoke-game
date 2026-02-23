@@ -1,5 +1,5 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
+import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
+import {v4 as uuidv4} from 'uuid';
 import type {SoundSettings} from '../../types/sound.types';
 
 export interface GameSettings {
@@ -19,7 +19,12 @@ interface SettingsState {
 }
 
 // Базовые пути для звуков
-const SOUNDS_BASE_PATH = '/sounds';
+const getBaseUrl = () => {
+    // Проверяем, находимся ли мы на GitHub Pages
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    return isGitHubPages ? '/meloman_karaoke-game' : '';
+};
+const SOUNDS_BASE_PATH = `${getBaseUrl()}/sounds`;
 
 // Начальное состояние с путями к дефолтным звукам
 const initialState: SettingsState = {
