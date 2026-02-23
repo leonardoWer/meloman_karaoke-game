@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks';
 import { addRound, updateRound, removeRound } from '../../store/slices/roundsSlice';
-
 import './AdminComponents.css';
-import type {ValidationError} from "../../utils/validators.ts";
+import type { ValidationError } from "../../utils/validators.ts";
 
 interface RoundSetupProps {
     errors?: ValidationError[];
@@ -108,7 +107,6 @@ const RoundSetup: React.FC<RoundSetupProps> = ({ errors = [] }) => {
                     </div>
 
                     <div className="round-content">
-
                         <div className="selection-section">
                             <h5>Вопрос для выбора</h5>
                             <select
@@ -151,33 +149,44 @@ const RoundSetup: React.FC<RoundSetupProps> = ({ errors = [] }) => {
 
                         <div className="songs-section">
                             <h5>Песни</h5>
-                            {[0, 1].map((songIndex) => (
-                                <div key={songIndex} className="song-input-group">
-                                    <div className="song-label">Песня {songIndex + 1}</div>
-                                    <input
-                                        type="text"
-                                        className={getFieldClass(round.roundNumber, `song_${songIndex + 1}_title`)}
-                                        placeholder="Название песни"
-                                        value={round.songs[songIndex]?.title || ''}
-                                        onChange={(e) => handleSongChange(round.id, songIndex, 'title', e.target.value)}
-                                    />
-                                    <input
-                                        type="url"
-                                        className={getFieldClass(round.roundNumber, `song_${songIndex + 1}_url`)}
-                                        placeholder="Ссылка на видео"
-                                        value={round.songs[songIndex]?.videoUrl || ''}
-                                        onChange={(e) => handleSongChange(round.id, songIndex, 'videoUrl', e.target.value)}
-                                    />
-                                    <textarea
-                                        className={getFieldClass(round.roundNumber, `song_${songIndex + 1}_answers`)}
-                                        placeholder="Правильные ответы"
-                                        value={round.songs[songIndex]?.correctAnswers?.join('\n') || ''}
-                                        onChange={(e) => handleSongChange(round.id, songIndex, 'correctAnswers', e.target.value)}
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                            {[0, 1].map((songIndex) => {
+                                const currentSong = round.songs[songIndex];
+                                return (
+                                    <div key={songIndex} className="song-input-group">
+                                        <div className="song-label">Песня {songIndex + 1}</div>
+                                        <input
+                                            type="text"
+                                            className={getFieldClass(round.roundNumber, `song_${songIndex + 1}_title`)}
+                                            placeholder="Название песни"
+                                            value={currentSong?.title || ''}
+                                            onChange={(e) => handleSongChange(round.id, songIndex, 'title', e.target.value)}
+                                        />
+                                        <input
+                                            type="url"
+                                            className={getFieldClass(round.roundNumber, `song_${songIndex + 1}_url`)}
+                                            placeholder="Ссылка на видео"
+                                            value={currentSong?.videoUrl || ''}
+                                            onChange={(e) => handleSongChange(round.id, songIndex, 'videoUrl', e.target.value)}
+                                        />
+                                        <textarea
+                                            className="input-field answer-textarea"
+                                            placeholder="Правильные ответы (по одному в строке)
+                                            Формат: [слово](first) - для команды 1
+                                                    [слово](second) - для команды 2
+                                            Пример: Я [люблю](first) [петь](second) караоке"
+                                            rows={8}
+                                            value={currentSong?.correctAnswers?.join('\n') || ''}
+                                            onChange={(e) => handleSongChange(round.id, songIndex, 'correctAnswers', e.target.value)}
+                                        />
 
+                                        {/* Добавляем подсказку под textarea */}
+                                        <div className="answer-hint">
+                                            <p>💡 Используйте <strong>[слово](first)</strong> для ответов команды 1 и <strong>[слово](second)</strong> для ответов команды 2</p>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
             ))}

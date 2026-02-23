@@ -1,0 +1,141 @@
+.answers-display {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.answers-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+}
+
+.answers-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.answers-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.answer-text {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.answer-part {
+    color: var(--text-primary);
+}
+
+.answer-part--first {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    position: relative;
+}
+.answer-part--first::after {
+    content: '①';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+}
+.answer-part--second {
+    color: var(--accent-purple);
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(123, 44, 191, 0.5);
+    position: relative;
+}
+.answer-part--second::after {
+    content: '②';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 0.8rem;
+    color: var(--accent-purple);
+}
+
+/* Легенда */
+.answers-legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.legend-color--first {
+    background: var(--accent-cyan);
+    box-shadow: 0 0 10px var(--accent-cyan);
+}
+
+.legend-color--second {
+    background: var(--accent-purple);
+    box-shadow: 0 0 10px var(--accent-purple);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .answers-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .answer-text {
+        font-size: 1.2rem;
+    }
+
+    .answers-legend {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .answer-part--first::after,
+    .answer-part--second::after {
+        top: -5px;
+        right: -5px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Анимация появления */
+.answer-item {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

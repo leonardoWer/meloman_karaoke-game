@@ -1,5 +1,6 @@
 import React from 'react';
 import './GamePhases.css';
+import AnswersDisplay from "../AnswersDisplay/AnswersDisplay.tsx";
 import type {Song, Team} from "../../../../types/game.types.ts";
 
 interface ShowingAnswersPhaseProps {
@@ -11,23 +12,16 @@ interface ShowingAnswersPhaseProps {
 }
 
 const ShowingAnswersPhase: React.FC<ShowingAnswersPhaseProps> = ({
-    song,
-    currentTeam,
-    onScoreSubmit,
-    teamAnswers
-}) => {
-return (
+     song,
+     currentTeam,
+     onScoreSubmit,
+     teamAnswers
+ }) => {
+    return (
         <div className="phase-container answers-phase">
-            <h3>Правильные ответы</h3>
-            <div className="answers-grid">
-                {song.correctAnswers.map((answer, index) => (
-                    <div key={index} className="answer-item glass-card">
-                        {answer}
-                    </div>
-                ))}
-            </div>
+            <AnswersDisplay answers={song.correctAnswers} />
 
-            <h4 style={{ marginTop: '30px' }}>
+            <h4 style={{ marginTop: '30px', marginBottom: '20px' }}>
                 Оценка команды: {currentTeam.name}
             </h4>
 
