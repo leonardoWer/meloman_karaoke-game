@@ -6,8 +6,8 @@
 
 .timer-display {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
 }
 
 .timer-value {
@@ -37,5 +37,4 @@
     stroke-width: 8;
     stroke-linecap: round;
     transition: stroke-dashoffset 0.3s ease;
-    filter: drop-shadow(0 0 8px currentColor);
 }

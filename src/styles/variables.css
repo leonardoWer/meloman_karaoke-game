@@ -31,8 +31,10 @@
     --glass-blur: blur(12px);
 
     /* Радиусы */
-    --border-radius: 16px;
-    --two-border-radius: 32px;
+    --border-radius: 32px;
+    --two-border-radius: 64px;
+
+    --gradient__light_blue: linear-gradient(135deg, var(--primary-main), var(--primary-light));
 
     /*  Шрифты  */
     --inter-bold-font: "Inter Tight Bold", "Inter Bold", "Inter", "Helvetica", "Roboto Bold", sans-serif;

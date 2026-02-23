@@ -1,13 +1,15 @@
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks';
-import { updateTeamName, updateGameSettings } from '../../store/slices/settingsSlice';
-import './AdminComponents.css';
+import { useAppSelector, useAppDispatch } from '../../../hooks/reduxHooks.ts';
+import { updateTeamName, updateGameSettings } from '../../../store/slices/settingsSlice.ts';
+
+import './GameSettings.css';
 
 const GameSettings: React.FC = () => {
     const dispatch = useAppDispatch();
     const { teams, numberOfRounds, selectionTimeLimit } = useAppSelector(
         (state) => state.settings.game
     );
+    const rounds = useAppSelector((state) => state.rounds.rounds);
 
     const handleTeamNameChange = (teamId: string, name: string) => {
         dispatch(updateTeamName({ teamId, name }));
@@ -26,6 +28,15 @@ const GameSettings: React.FC = () => {
             dispatch(updateGameSettings({ selectionTimeLimit: value }));
         }
     };
+
+    // Подсчитываем заполненные раунды
+    const completedRounds = rounds.filter(round =>
+        round.songs.every(song =>
+            song.title.trim() !== '' &&
+            song.videoUrl.trim() !== '' &&
+            song.correctAnswers.length > 0
+        )
+    ).length;
 
     return (
         <div className="settings-container glass">
@@ -75,6 +86,25 @@ const GameSettings: React.FC = () => {
                         onChange={handleTimeLimitChange}
                     />
                 </div>
+            </div>
+
+            {/* Индикатор готовности раундов */}
+            <div className="rounds-status glass-card">
+                <h4>Статус раундов</h4>
+                <div className="progress-info">
+                    <span>Заполнено раундов: {completedRounds} из {rounds.length}</span>
+                    <div className="progress-bar">
+                        <div
+                            className="progress-fill"
+                            style={{ width: `${(completedRounds / rounds.length) * 100}%` }}
+                        />
+                    </div>
+                </div>
+                {completedRounds < rounds.length && (
+                    <p className="warning-text">
+                        ⚠️ Заполните все раунды перед началом игры
+                    </p>
+                )}
             </div>
         </div>
     );

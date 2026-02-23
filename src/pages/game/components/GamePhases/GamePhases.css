@@ -1,0 +1,105 @@
+.phase-container {
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.selection-phase {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.question-container {
+    padding: 30px;
+    margin: 20px 0;
+    background: rgba(0, 180, 255, 0.1);
+}
+
+.selection-question {
+    font-size: 1.3rem;
+    color: var(--accent-cyan);
+    line-height: 1.6;
+}
+
+.teams-turn {
+    margin: 30px 0;
+}
+
+.current-team {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent-blue);
+    margin-top: 10px;
+    text-shadow: 0 0 20px var(--accent-blue);
+}
+
+.songs-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+.song-card {
+    width: 50%;
+    min-height: 200px;
+    padding: 50px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.song-card:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-blue);
+}
+.song-title {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+}
+
+.video-phase {
+    width: 100%;
+}
+
+.current-song {
+    color: var(--accent-blue);
+    margin-bottom: 20px;
+}
+
+.answers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.answer-item {
+    padding: 15px;
+    background: rgba(0, 180, 255, 0.1);
+    border: 1px solid var(--accent-blue);
+    text-align: left;
+}
+
+.scoring-section {
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.team-scoring {
+    padding: 20px;
+}
+
+.score-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.score-hint {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .current-team {
+        font-size: 1.5rem;
+    }
+}

@@ -31,12 +31,12 @@ const initialState: SettingsState = {
         volume: 0.7
     },
     game: {
-        numberOfRounds: 6,
+        numberOfRounds: 1,
         teams: [
             { id: uuidv4(), name: 'Команда 1' },
             { id: uuidv4(), name: 'Команда 2' }
         ],
-        selectionTimeLimit: 30
+        selectionTimeLimit: 20
     },
     isLoading: false,
     error: null

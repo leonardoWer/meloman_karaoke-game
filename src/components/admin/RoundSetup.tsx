@@ -1,11 +1,25 @@
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks';
 import { addRound, updateRound, removeRound } from '../../store/slices/roundsSlice';
-import './AdminComponents.css';
 
-const RoundSetup: React.FC = () => {
+import './AdminComponents.css';
+import type {ValidationError} from "../../utils/validators.ts";
+
+interface RoundSetupProps {
+    errors?: ValidationError[];
+}
+
+const RoundSetup: React.FC<RoundSetupProps> = ({ errors = [] }) => {
     const dispatch = useAppDispatch();
     const rounds = useAppSelector((state) => state.rounds.rounds);
+
+    const hasError = (roundNumber: number, field: string): boolean => {
+        return errors.some(e => e.roundNumber === roundNumber && e.field === field);
+    };
+
+    const getFieldClass = (roundNumber: number, field: string) => {
+        return hasError(roundNumber, field) ? 'input-field error' : 'input-field';
+    };
 
     // Добавляем первый раунд при загрузке, если их нет
     useEffect(() => {
@@ -94,35 +108,6 @@ const RoundSetup: React.FC = () => {
                     </div>
 
                     <div className="round-content">
-                        <div className="songs-section">
-                            <h5>Песни</h5>
-                            {[0, 1].map((songIndex) => (
-                                <div key={songIndex} className="song-input-group">
-                                    <div className="song-label">Песня {songIndex + 1}</div>
-                                    <input
-                                        type="text"
-                                        className="input-field"
-                                        placeholder="Название песни"
-                                        value={round.songs[songIndex]?.title || ''}
-                                        onChange={(e) => handleSongChange(round.id, songIndex, 'title', e.target.value)}
-                                    />
-                                    <input
-                                        type="url"
-                                        className="input-field"
-                                        placeholder="Ссылка на видео"
-                                        value={round.songs[songIndex]?.videoUrl || ''}
-                                        onChange={(e) => handleSongChange(round.id, songIndex, 'videoUrl', e.target.value)}
-                                    />
-                                    <textarea
-                                        className="input-field"
-                                        placeholder="Правильные ответы (по одному в строке)"
-                                        rows={3}
-                                        value={round.songs[songIndex]?.correctAnswers?.join('\n') || ''}
-                                        onChange={(e) => handleSongChange(round.id, songIndex, 'correctAnswers', e.target.value)}
-                                    />
-                                </div>
-                            ))}
-                        </div>
 
                         <div className="selection-section">
                             <h5>Вопрос для выбора</h5>
@@ -157,12 +142,42 @@ const RoundSetup: React.FC = () => {
                                     type="number"
                                     className="input-field"
                                     value={round.selectionQuestion.timeLimit}
-                                    min="10"
+                                    min="5"
                                     max="60"
                                     onChange={(e) => handleQuestionChange(round.id, 'timeLimit', parseInt(e.target.value) || 30)}
                                 />
                             </div>
                         </div>
+
+                        <div className="songs-section">
+                            <h5>Песни</h5>
+                            {[0, 1].map((songIndex) => (
+                                <div key={songIndex} className="song-input-group">
+                                    <div className="song-label">Песня {songIndex + 1}</div>
+                                    <input
+                                        type="text"
+                                        className={getFieldClass(round.roundNumber, `song_${songIndex + 1}_title`)}
+                                        placeholder="Название песни"
+                                        value={round.songs[songIndex]?.title || ''}
+                                        onChange={(e) => handleSongChange(round.id, songIndex, 'title', e.target.value)}
+                                    />
+                                    <input
+                                        type="url"
+                                        className={getFieldClass(round.roundNumber, `song_${songIndex + 1}_url`)}
+                                        placeholder="Ссылка на видео"
+                                        value={round.songs[songIndex]?.videoUrl || ''}
+                                        onChange={(e) => handleSongChange(round.id, songIndex, 'videoUrl', e.target.value)}
+                                    />
+                                    <textarea
+                                        className={getFieldClass(round.roundNumber, `song_${songIndex + 1}_answers`)}
+                                        placeholder="Правильные ответы"
+                                        value={round.songs[songIndex]?.correctAnswers?.join('\n') || ''}
+                                        onChange={(e) => handleSongChange(round.id, songIndex, 'correctAnswers', e.target.value)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
                     </div>
                 </div>
             ))}

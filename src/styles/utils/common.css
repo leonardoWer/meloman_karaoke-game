@@ -28,7 +28,7 @@
 .btn {
     padding: 12px 32px;
     border: none;
-    border-radius: 12px;
+    border-radius: var(--border-radius);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -38,7 +38,6 @@
     position: relative;
     overflow: hidden;
 }
-
 .btn::before {
     content: '';
     position: absolute;
@@ -52,15 +51,6 @@
 
 .btn:hover::before {
     left: 100%;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px var(--primary-glow);
-}
-
-.btn:active {
-    transform: translateY(0);
 }
 
 .btn-outline {

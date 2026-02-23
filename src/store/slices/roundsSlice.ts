@@ -6,8 +6,34 @@ interface RoundsState {
     rounds: Round[];
 }
 
+// Создаем начальный раунд с пустыми песнями
+const createInitialRound = (): Round => ({
+    id: uuidv4(),
+    roundNumber: 1,
+    songs: [
+        {
+            id: uuidv4(),
+            title: '',
+            videoUrl: '',
+            correctAnswers: []
+        },
+        {
+            id: uuidv4(),
+            title: '',
+            videoUrl: '',
+            correctAnswers: []
+        }
+    ],
+    selectionQuestion: {
+        type: 'alternating',
+        timeLimit: 30,
+        topic: ''
+    },
+    isCompleted: false
+});
+
 const initialState: RoundsState = {
-    rounds: []
+    rounds: [createInitialRound()] // Только 1 раунд
 };
 
 export const roundsSlice = createSlice({
