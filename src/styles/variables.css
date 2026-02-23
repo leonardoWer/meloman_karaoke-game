@@ -1,0 +1,40 @@
+:root {
+    /* Основные цвета */
+    --primary-dark: #0a1929;
+    --primary-main: #1e4b8c;
+    --primary-light: #4a7db5;
+    --primary-glow: rgba(30, 75, 140, 0.5);
+
+    /* Акценты */
+    --accent-blue: #00b4ff;
+    --accent-cyan: #00e5ff;
+    --accent-purple: #7b2cbf;
+
+    /* Фоновые цвета */
+    --bg-dark: #0b1a2f;
+    --bg-darker: #07111f;
+    --bg-glass: rgba(10, 25, 45, 0.7);
+
+    /* Текст */
+    --text-primary: #ffffff;
+    --text-secondary: #b0c5e0;
+    --text-muted: #6b8bb0;
+
+    /* Статусы */
+    --success: #00c48c;
+    --warning: #ffb547;
+    --error: #ff6b6b;
+
+    /* Эффекты */
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    --glass-blur: blur(12px);
+
+    /* Радиусы */
+    --border-radius: 16px;
+    --two-border-radius: 32px;
+
+    /*  Шрифты  */
+    --inter-bold-font: "Inter Tight Bold", "Inter Bold", "Inter", "Helvetica", "Roboto Bold", sans-serif;
+    --inter-regular-font: "Inter Tight Regular", "Inter Regular", "Inter", "Helvetica", "Roboto Regular", sans-serif;
+}

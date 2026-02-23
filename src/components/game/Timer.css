@@ -1,0 +1,41 @@
+.timer-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.timer-display {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.timer-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: 0 0 20px currentColor;
+}
+
+.timer-progress {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-progress-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.timer-progress-fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.3s ease;
+    filter: drop-shadow(0 0 8px currentColor);
+}

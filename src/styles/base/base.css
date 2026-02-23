@@ -1,0 +1,27 @@
+/* Общие параметры */
+body {
+    font-family: var(--inter-regular-font);
+    background-color: var(--light-bg);
+}
+
+
+/* Выделение мыши */
+::selection {
+    background: var(--dark-gray);
+    color: var(--light-bg);
+}
+
+/* Скроллбар */
+html {
+    scrollbar-gutter: stable;
+}
+&::-webkit-scrollbar {
+    background: transparent;
+}
+&::-webkit-scrollbar-thumb {
+    background-color: var(--dark-gray);
+    background-clip: content-box;
+}
+&::-webkit-scrollbar-thumb:hover {
+    background-color: var(--gray);
+}
