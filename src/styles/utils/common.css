@@ -16,12 +16,11 @@
     border-radius: 20px;
     transition: all 0.3s ease;
 }
-
 .glass-card:hover {
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0, 180, 255, 0.15);
+    box-shadow: 0 4px 10px rgba(0, 180, 255, 0.15);
 }
 
 /* Кнопки */
@@ -69,7 +68,6 @@
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 .btn-glass:hover {
     background: rgba(255, 255, 255, 0.2);
 }
